@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/administrador/home.xhtml">
+			<ui:define name="content">
+			<h:form id="frm">
+				<p:growl id="men" />
+
+				<p:toolbar>
+					<f:facet name="right">
+						<p:commandButton value="Nuevo" icon="ui-icon-disk"
+						  action="#{administradorController.newAdministrador()}"
+						  ajax="false"/>
+						
+						 <p:commandButton value="Editar" icon="ui-icon-disk"
+						  action="#{administradorController.editAdministrador()}"
+						  ajax="false"/>
+						
+						<p:commandButton value="Insertar un servicio" icon="ui-icon-disk"
+						  action="#{servicioController.newServicio()}"
+						  ajax="false"/>
+						  
+						
+
+					</f:facet>
+				</p:toolbar>
+
+
+				<p:panelGrid id="panGriBuscador" columns="3" style="width:100%">
+					<p:outputLabel value="Buscar Por Nombre:" for="txtSearchName" />
+					<p:inputText id="txtSearchName"  value="#{administradorController.filterName}" />
+					<p:commandButton icon="ui-icon-search" 
+					  actionListener="#{administradorController.searchAdministradorByName}"
+					  update=":frm:datTabAdministrador :frm:men"/>
+				</p:panelGrid>
+
+				<p:dataTable id="datTabAdministrador"
+					emptyMessage="No existen administradores registrados"
+					value="#{administradorController.administradores}" var="administrador"
+					
+					rowKey="#{administrador.id}"
+					selectionMode="single"
+					selection="#{administradorController.administradorSelect}"
+					
+					paginator="true" rows="10">
+					
+					
+					<p:ajax event="rowSelect"
+						listener="#{administradorController.SelectAdministrador}" />
+					
+
+					<p:column headerText="Id">
+						<p:outputLabel value="#{administrador.id}" />
+					</p:column>
+					<p:column headerText="Nombre">
+						<p:outputLabel value="#{administrador.name}" />
+					</p:column>
+					<p:column headerText="Apellido">
+						<p:outputLabel value="#{administrador.name}" />
+					</p:column>
+					<p:column headerText="Dni">
+						<p:outputLabel value="#{administrador.dni}" />
+					</p:column>
+						<p:column headerText="Edad">
+						<p:outputLabel value="#{administrador.edad}" />
+					</p:column>
+						<p:column headerText="Sexo">
+						<p:outputLabel value="#{administrador.sexo}" />
+					</p:column>
+					<p:column headerText="Telefono">
+						<p:outputLabel value="#{administrador.telefono}" />
+					</p:column>
+					<p:column headerText="Tipo de cargo">
+						<p:outputLabel value="#{administrador.cargo}" />
+					</p:column>
+					<p:column headerText="Direccion">
+						<p:outputLabel value="#{administrador.direccion}" />
+					</p:column>
+					<p:column headerText="Correo">
+						<p:outputLabel value="#{administrador.correo}" />
+					</p:column>
+					<p:column headerText="Usuario">
+						<p:outputLabel value="#{administrador.usuario}" />
+					</p:column>
+				<p:column headerText="Contraseña">
+						<p:outputLabel value="#{administrador.contra}" />
+					</p:column>
+				
+					
+					
+				</p:dataTable>
+
+				
+
+
+			</h:form>
+		</ui:define>
+		
+				
+	</ui:composition>
+
+</body>
+</html>

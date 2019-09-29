@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/administrador/home.xhtml">
+		
+		<ui:define name="content">
+			<h:form id="frm">
+				<p:growl id="men" />
+
+				<p:toolbar>
+					<f:facet name="right">
+						<p:commandButton value="Guardar" icon="ui-icon-disk" 
+						action="#{productoController.saveProducto()}" ajax="false"/>
+
+                     	<p:commandButton value="Regresar" icon="ui-icon-disk"
+						  action="#{productoController.listProducto()}"
+						  immediate="true"
+						  ajax="false"/>
+					
+					</f:facet>
+				</p:toolbar>
+
+
+					<p:panelGrid id="panGridProducto" columns="2" style="width:100%">
+				
+				<p:outputLabel value="Tipo de producto:" for="txtTipoProducto" />
+					<p:selectOneMenu id="txtTipoProducto" required="true" effect="drop"
+						value="#{productoController.producto.tipo}"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem itemLabel="Seleccione una opción"
+							noSelectionOption="true" itemValue="" />
+						<f:selectItem itemLabel="Organicos" itemValue="Organicos"></f:selectItem>
+						<f:selectItem itemLabel="Sanitarios" itemValue="Sanitarios"></f:selectItem>
+					</p:selectOneMenu>
+					
+					<p:outputLabel value="Stock:" for="txtStock" />
+					<p:inputText id="txtStock" required="true" maxlength="45"
+						value="#{productoController.producto.stock}" />
+						
+						<p:outputLabel value="Estado:" for="txtEstado" />
+					<p:selectOneMenu id="txtEstado" required="true" effect="drop"
+						value="#{productoController.producto.estado}"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem itemLabel="Seleccione una opción"
+							noSelectionOption="true" itemValue="" />
+						<f:selectItem itemLabel="Bueno" itemValue="Bueno"></f:selectItem>
+						<f:selectItem itemLabel="Malo" itemValue="Malo"></f:selectItem>
+					</p:selectOneMenu>
+					
+						<p:outputLabel value="Descripcion:" for="txtDescripcion" />
+					<p:inputText id="txtDescripcion" required="true" maxlength="45"
+						value="#{problemaController.problema.descripcion}" />
+						
+				
+						
+				
+				</p:panelGrid>
+				<br></br>
+
+
+
+			</h:form>
+		</ui:define>
+				
+	</ui:composition>
+
+</body>
+</html>

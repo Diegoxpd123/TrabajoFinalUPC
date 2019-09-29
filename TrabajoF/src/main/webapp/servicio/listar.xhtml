@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/administrador/home.xhtml">
+			<ui:define name="content">
+			<h:form id="frm">
+				<p:growl id="men" />
+
+				<p:toolbar>
+					<f:facet name="right">
+						<p:commandButton value="Nuevo" icon="ui-icon-disk"
+						  action="#{servicioController.newServicio()}"
+						  ajax="false"/>
+						
+						 <p:commandButton value="Editar" icon="ui-icon-disk"
+						  action="#{servicioController.editServicio()}"
+						  ajax="false"/>
+						
+						<p:commandButton value="Rellenar productos" icon="ui-icon-disk"
+						  action="#{servicioProductoController.newServicioproducto()}"
+						  ajax="false"/>
+						 
+						 <p:commandButton value="Rellenar problemas" icon="ui-icon-disk"
+						  action="#{problemaController.newProblema()}"
+						  ajax="false"/>
+						  
+						  
+					
+
+					</f:facet>
+				</p:toolbar>
+
+
+				<p:panelGrid id="panGriBuscador" columns="3" style="width:100%">
+					<p:outputLabel value="Buscar Por Nombre:" for="txtSearchName" />
+					<p:inputText id="txtSearchName"  value="#{servicioController.filterName}" />
+					<p:commandButton icon="ui-icon-search" 
+					  actionListener="#{servicioController.searchServicioByName}"
+					  update=":frm:datTabServicio :frm:men"/>
+				</p:panelGrid>
+
+				<p:dataTable id="datTabServicio"
+					emptyMessage="No existen administradores registrados"
+					value="#{servicioController.servicios}" var="servicio"
+					
+					rowKey="#{servicio.id}"
+					selectionMode="single"
+					selection="#{servicioController.servicioSelect}"
+					
+					paginator="true" rows="10">
+					
+					
+					<p:ajax event="rowSelect"
+						listener="#{servicioController.SelectServicio}" />
+					
+
+					<p:column headerText="Id">
+						<p:outputLabel value="#{servicio.id}" />
+					</p:column>
+				<p:column headerText="Estado">
+						<p:outputLabel value="#{servicio.estado}" />
+					</p:column>
+					
+					<p:column headerText="Fecha Pedido">
+						<p:outputLabel value="#{servicio.fechapedido}" />
+					</p:column>
+					
+						<p:column headerText="Fecha Entrega">
+						<p:outputLabel value="#{servicio.fechaentrega}" />
+					</p:column>
+						<p:column headerText="Fecha Devolucion">
+						<p:outputLabel value="#{servicio.fechadevolucion}" />
+					</p:column>
+					
+					<p:column headerText="Nombre del cliente">
+						<p:outputLabel value="#{servicioController.cliente.name}" />
+					</p:column>
+					
+					<p:column headerText="Nombre del Administrador">
+						<p:outputLabel value="#{servicioController.administrador.name}" />
+					</p:column>
+					
+		
+					
+				</p:dataTable>
+			</h:form>
+		</ui:define>
+		
+				
+	</ui:composition>
+
+</body>
+</html>

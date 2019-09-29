@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/administrador/home.xhtml">
+			<ui:define name="content">
+			<h:form id="frm">
+				<p:growl id="men" />
+
+				<p:toolbar>
+					<f:facet name="right">
+						<p:commandButton value="Nuevo" icon="ui-icon-disk"
+						  action="#{productoController.newProducto()}"
+						  ajax="false"/>
+						
+						 <p:commandButton value="Editar" icon="ui-icon-disk"
+						  action="#{productoController.editProducto()}"
+						  ajax="false"/>
+						
+
+					</f:facet>
+				</p:toolbar>
+
+
+				<p:panelGrid id="panGriBuscador" columns="3" style="width:100%">
+					<p:outputLabel value="Buscar Por Nombre:" for="txtSearchName" />
+					<p:inputText id="txtSearchName"  value="#{productoController.filterName}" />
+					<p:commandButton icon="ui-icon-search" 
+					  actionListener="#{productoController.searchProductoByName}"
+					  update=":frm:datTabProducto :frm:men"/>
+				</p:panelGrid>
+
+				<p:dataTable id="datTabProducto"
+					emptyMessage="No existen administradores registrados"
+					value="#{productoController.productos}" var="producto"
+					
+					rowKey="#{producto.id}"
+					selectionMode="single"
+					selection="#{productoController.productoSelect}"
+					
+					paginator="true" rows="10">
+					
+					
+					<p:ajax event="rowSelect"
+						listener="#{productoController.SelectProducto}" />
+					
+
+					<p:column headerText="Id">
+						<p:outputLabel value="#{producto.id}" />
+					</p:column>
+					<p:column headerText="Tipo">
+						<p:outputLabel value="#{producto.tipo}" />
+					</p:column>
+				<p:column headerText="Stock">
+						<p:outputLabel value="#{producto.stock}" />
+					</p:column>
+					<p:column headerText="Estado">
+						<p:outputLabel value="#{producto.estado}" />
+					</p:column>
+					<p:column headerText="Descripcion">
+						<p:outputLabel value="#{producto.descripcion}" />
+					</p:column>
+				</p:dataTable>
+
+				
+
+
+			</h:form>
+		</ui:define>
+		
+				
+	</ui:composition>
+
+</body>
+</html>

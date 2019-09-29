@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head><title><ui:insert name="pageTitle">JOSEDMAR S.A.C</ui:insert></title></h:head>
+<body>
+
+	
+		<ui:insert name="header">
+		<h:form>
+			<p:menubar autoDisplay="true">
+				<p:submenu label="Cliente" icon="ui-icon-pencil">
+					<p:menuitem icon="ui-icon-document" value="Registrar Cliente"
+						url="/cliente/registrar.xhtml" />
+						<p:menuitem icon="ui-icon-document" value="Listar Clientes"
+						url="/cliente/listar.xhtml" />
+				</p:submenu>
+				<p:submenu label="Seleccionar" icon="ui-icon-pencil">
+					<p:menuitem icon="ui-icon-document" value="Administrador"
+						url="/administrador/home.xhtml" />
+						<p:menuitem icon="ui-icon-document" value="Cliente"
+						url="/cliente/home.xhtml" />
+						
+					
+						
+				</p:submenu>
+			</p:menubar>
+		</h:form>
+	</ui:insert>
+
+	<ui:insert name="content">
+
+	</ui:insert>
+
+
+	<ui:insert name="footer">
+		<div>Copyright © hampcode, 2019. Todos los derechos reservados por mi tu papi</div>
+	</ui:insert>
+		
+	
+
+</body>
+</html>

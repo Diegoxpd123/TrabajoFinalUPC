@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template="/administrador/home.xhtml">
+			<ui:define name="content">
+			<h:form id="frm">
+				<p:growl id="men"/>
+
+					<p:toolbar>
+					<f:facet name="right">
+						<p:commandButton value="Guardar" icon="ui-icon-disk" 
+						action="#{servicioController.saveServicio()}" ajax="false"/>
+
+						<p:commandButton value="Regresar" icon="ui-icon-disk"
+						  action="#{servicioController.listServicio()}"
+						  immediate="true"
+						  ajax="false"/>
+					</f:facet>
+				</p:toolbar>
+
+
+	
+					<p:panelGrid id="panGridServicio" columns="2" style="width:100%">
+					
+					
+						<p:outputLabel value="Estado:" for="txtEstado" />
+					<p:selectOneMenu id="txtEstado" required="true" effect="drop"
+						value="#{servicioController.servicio.estado}"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem itemLabel="Seleccione una opción"
+							noSelectionOption="true" itemValue="" />
+						<f:selectItem itemLabel="Inicio" itemValue="Inicio"></f:selectItem>
+						<f:selectItem itemLabel="Proceso" itemValue="Proceso"></f:selectItem>
+						<f:selectItem itemLabel="Terminado" itemValue="Terminado"></f:selectItem>
+					</p:selectOneMenu>
+					
+						<p:outputLabel value="Fecha pedido:" for="txtFechaPedido" />
+					<p:inputText id="txtFechaPedido" required="true" maxlength="45"
+						value="#{servicioController.servicio.fechapedido}" />
+						
+					<p:outputLabel value="Fecha entrega:" for="txtFechaEntrega" />
+					<p:inputText id="txtFechaEntrega" required="true" maxlength="45"
+						value="#{servicioController.servicio.fechaentrega}" />
+						
+						<p:outputLabel value="Fecha devolucion:" for="txtFechaDevolucion" />
+					<p:inputText id="txtFechaDevolucion" required="true" maxlength="45"
+						value="#{servicioController.servicio.fechadevolucion}" />
+					
+			<p:outputLabel value="Cliente:" for="cboUnidad" />
+					<p:selectOneMenu id="cboUnidad" required="true" effect="drop"
+						value="#{servicioController.cliente}"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem itemLabel="Seleccione una opción"
+							noSelectionOption="true" itemValue="" />
+						<f:selectItems value="#{clienteController.clientes}"
+							var="cliente" itemLabel="#{cliente.id}"
+							itemValue="#{cliente}" />
+					</p:selectOneMenu>
+					
+					<p:outputLabel value="Administrador:" for="cboUnidad1" />
+					<p:selectOneMenu id="cboUnidad1" required="true" effect="drop"
+						value="#{servicioController.administrador}"
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem itemLabel="Seleccione una opción"
+							noSelectionOption="true" itemValue="" />
+						<f:selectItems value="#{administradorController.administradores}"
+							var="administrador" itemLabel="#{administrador.id}"
+							itemValue="#{administrador}" />
+					</p:selectOneMenu>
+					
+						
+				
+						
+						
+					
+					
+				
+						
+				
+				</p:panelGrid>
+				<br></br>
+
+
+
+			</h:form>
+		</ui:define>
+		
+				
+	</ui:composition>
+
+</body>
+</html>

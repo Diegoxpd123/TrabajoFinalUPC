@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml"
+
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<ui:composition template = "/cliente/home.xhtml" >
+
+            <ui:define name = "content">
+ 
+             <h:form id = "frm">
+  
+                  <p:growl id = "men" />
+   
+
+                   <p:toolbar>
+					<f:facet name = "right">
+
+                        <p:commandButton value = "Nuevo" icon="ui-icon-disk"
+						  action="#{clienteController.newCliente()}"
+						  ajax="false"/>
+						
+						 <p:commandButton value = "Editar" icon="ui-icon-disk"
+						  action="#{clienteController.editCliente()}"
+						  ajax="false"/>
+						
+
+					</f:facet>
+				</p:toolbar>
+
+
+				<p:panelGrid id = "panGriBuscador" columns="3" style="width:100%">
+					<p:outputLabel value = "Buscar Por Nombre:" for="txtSearchName" />
+					<p:inputText id = "txtSearchName"  value="#{clienteController.filterName}" />
+					<p:commandButton icon = "ui-icon-search"
+
+                      actionListener="#{clienteController.searchClienteByName}"
+					  update=":frm:datTabCliente :frm:men"/>
+				</p:panelGrid>
+
+				<p:dataTable id = "datTabCliente"
+
+                    emptyMessage="No existen clientees registrados"
+					value="#{clienteController.clientes}" var="cliente"
+					
+					rowKey="#{cliente.id}"
+					selectionMode="single"
+					selection="#{clienteController.clienteSelect}"
+					
+					paginator="true" rows="10">
+					
+					
+					<p:ajax event="rowSelect"
+						listener="#{clienteController.SelectCliente}" />
+					
+
+					
+					<p:column headerText="Id">
+						<p:outputLabel value="#{cliente.id}" />
+					</p:column>
+					<p:column headerText="Nombre">
+						<p:outputLabel value="#{cliente.name}" />
+					</p:column>
+					<p:column headerText="Apellido">
+						<p:outputLabel value="#{cliente.name}" />
+					</p:column>
+					<p:column headerText="Dni">
+						<p:outputLabel value="#{cliente.dni}" />
+					</p:column>
+						<p:column headerText="Edad">
+						<p:outputLabel value="#{cliente.edad}" />
+					</p:column>
+						<p:column headerText="Sexo">
+						<p:outputLabel value="#{cliente.sexo}" />
+					</p:column>
+					<p:column headerText="Telefono">
+						<p:outputLabel value="#{cliente.telefono}" />
+					</p:column>
+					<p:column headerText="Tipo de cargo">
+						<p:outputLabel value="#{cliente.tarjeta}" />
+					</p:column>
+					<p:column headerText="Direccion">
+						<p:outputLabel value="#{cliente.direccion}" />
+					</p:column>
+					<p:column headerText="Correo">
+						<p:outputLabel value="#{cliente.correo}" />
+					</p:column>
+					<p:column headerText="Usuario">
+						<p:outputLabel value="#{cliente.usuario}" />
+					</p:column>
+				<p:column headerText="Contraseña">
+						<p:outputLabel value="#{cliente.contra}" />
+					</p:column>
+					
+				</p:dataTable>
+
+				
+
+
+			</h:form>
+		</ui:define>
+		
+				
+	</ui:composition>
+
+</body>
+</html>
